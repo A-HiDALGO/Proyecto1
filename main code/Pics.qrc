@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>bg.png</file>
+        <file>background.jfif</file>
+        <file>back_card.png</file>
+        <file>01.png</file>
+        <file>02.png</file>
+        <file>03.png</file>
+        <file>04.png</file>
+        <file>05.png</file>
+        <file>06.png</file>
+        <file>07.png</file>
+        <file>08.png</file>
+        <file>09.png</file>
+    </qresource>
+</RCC>
