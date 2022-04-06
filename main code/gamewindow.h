@@ -38,6 +38,10 @@ public:
     QPushButton* tarjetaAnterior;
     QPushButton* tarjetaActual;
 
+
+public slots:
+    void getNick1(QString (n1));
+    void getNick2(QString (n2));
 private slots:
     void refreshGame();
     void refreshTimer();
@@ -50,6 +54,7 @@ private slots:
     void definirResultadoParcial();
     void reiniciarTarjetas();
     void definirResultadoFinal();
+
 
 
 private:

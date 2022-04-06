@@ -9,14 +9,17 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    lobby.cpp \
     main.cpp \
     gamewindow.cpp
 
 HEADERS += \
-    gamewindow.h
+    gamewindow.h \
+    lobby.h
 
 FORMS += \
-    gamewindow.ui
+    gamewindow.ui \
+    lobby.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -12,5 +12,7 @@
         <file>07.png</file>
         <file>08.png</file>
         <file>09.png</file>
+        <file>bgLobby.png</file>
+        <file>bg1.png</file>
     </qresource>
 </RCC>

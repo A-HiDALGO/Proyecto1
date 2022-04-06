@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1146</width>
-    <height>656</height>
+    <width>1132</width>
+    <height>621</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>GameWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/background.jfif);</string>
+   <string notr="true">background-image: url(:/bg1.png);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -332,9 +332,9 @@
    <widget class="QFrame" name="StatusBar">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>50</y>
-      <width>231</width>
+      <width>241</width>
       <height>571</height>
      </rect>
     </property>
@@ -361,14 +361,14 @@ border-radius
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>211</width>
+       <width>221</width>
        <height>51</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>18</pointsize>
-       <italic>false</italic>
+       <family>Bahnschrift SemiBold</family>
+       <pointsize>22</pointsize>
        <bold>true</bold>
       </font>
      </property>
@@ -379,7 +379,7 @@ border-radius
       <string notr="true">color: white</string>
      </property>
      <property name="text">
-      <string>CASINO ROYALE</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;CASINO ROYALE&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -388,58 +388,63 @@ border-radius
     <widget class="QLabel" name="timer">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>80</y>
-       <width>61</width>
+       <x>20</x>
+       <y>90</y>
+       <width>71</width>
        <height>31</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <family>Bahnschrift SemiBold</family>
+       <pointsize>16</pointsize>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">color: white</string>
      </property>
      <property name="text">
-      <string>TIMER:  </string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TIMER: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="player1">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>170</y>
-       <width>111</width>
-       <height>21</height>
+       <x>20</x>
+       <y>150</y>
+       <width>71</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <family>Bahnschrift SemiBold</family>
        <pointsize>12</pointsize>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">color: white</string>
      </property>
      <property name="text">
-      <string>Player 1</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Player 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="player2">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>370</y>
-       <width>111</width>
-       <height>21</height>
+       <y>310</y>
+       <width>71</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
-       <bold>false</bold>
+       <family>Bahnschrift SemiBold</family>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -452,29 +457,31 @@ border-radius
     <widget class="QLabel" name="seconds">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>80</y>
-       <width>61</width>
+       <x>100</x>
+       <y>90</y>
+       <width>71</width>
        <height>31</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <family>Bahnschrift SemiBold</family>
+       <pointsize>16</pointsize>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
       <string notr="true">color: white</string>
      </property>
      <property name="text">
-      <string>00:00</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;00:00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QLabel" name="PointsPlayer1">
+    <widget class="QLabel" name="txtPointsPlayer1">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>250</y>
+       <y>230</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -496,7 +503,7 @@ border-radius
      <property name="geometry">
       <rect>
        <x>110</x>
-       <y>250</y>
+       <y>230</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -508,7 +515,75 @@ border-radius
       </font>
      </property>
      <property name="text">
-      <string>0</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="nickPlayer2">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>310</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Bahnschrift SemiBold</family>
+       <pointsize>12</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white</string>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-style:italic;&quot;&gt;NickPlayer2&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="nickPlayer1">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>150</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Bahnschrift SemiBold</family>
+       <pointsize>12</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white</string>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-style:italic;&quot;&gt;NickPlayer1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="txtPointsPlayer2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>400</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white</string>
+     </property>
+     <property name="text">
+      <string>Points</string>
      </property>
     </widget>
    </widget>

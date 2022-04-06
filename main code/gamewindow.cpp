@@ -1,5 +1,6 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
+#include "ui_lobby.h"
 
 GameWindow::GameWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -28,10 +29,15 @@ GameWindow::GameWindow(QWidget *parent)
     connect(ui ->card_17, SIGNAL(clicked()),this,SLOT(findedCard()));
     connect(ui ->card_18, SIGNAL(clicked()),this,SLOT(findedCard()));
 
-
     startGame();
+}
 
+void GameWindow:: getNick1(QString n1){
+    ui->nickPlayer1->setText(QString (n1));
 
+}
+void GameWindow:: getNick2(QString n2){
+    ui->nickPlayer2->setText(QString (n2));
 }
 
 void GameWindow:: setFinalResult(){
@@ -61,11 +67,9 @@ void GameWindow:: setFinalResult(){
         else{
             QCoreApplication::quit();
         }
-
      }
    }
 }
-
 
 
 void GameWindow::findedCard(){
@@ -80,22 +84,17 @@ void GameWindow::findedCard(){
         definirResultadoParcial();
         jugadaIniciada=false;
     }
-
 }
 
 void GameWindow::reiniciarTarjetas(){
-    //return tiles from current turn to the default state (remove backgrounds)
     tarjetaAnterior->setStyleSheet("#" + tarjetaAnterior->objectName() + "{ background-image: url(:/back_card.png);}");
     tarjetaActual->setStyleSheet("#" + tarjetaActual->objectName() + "{ background-image: url(:/back_card.png);}");
-
     //re-enable both tiles so they can be used on another turn
     tarjetaActual->setEnabled(true);
     tarjetaAnterior->setEnabled(true);
-
     //re-enable the whole tile section
     ui->CardsFrame->setEnabled(true);
 }
-
 
 void GameWindow::definirResultadoFinal(){
     msgBox.setWindowTitle("Juego terminado");
@@ -150,8 +149,6 @@ void GameWindow::definirResultadoParcial(){
     }
 }
 
-
-
 void GameWindow::showImage(){
     QString nombre_tarjeta=tarjetaActual->objectName();
     QString img= setRandomCards[nombre_tarjeta];
@@ -159,10 +156,10 @@ void GameWindow::showImage(){
 
 }
 
-
 void GameWindow::startGame(){
     jugadaIniciada = false;
     points = 0;
+    ui->PointsP1->setText(QString::number(points));
     pairsLeft = 9;
     time.setHMS(0,1,0);
     ui->seconds->setText(time.toString("m;ss"));
@@ -170,14 +167,12 @@ void GameWindow::startGame(){
     mixVector();
     divideImgs();
     ui->CardsFrame->setEnabled(true);
+    QList<QPushButton *> botones = ui->CardsFrame->findChildren<QPushButton*>();
+    foreach (QPushButton* b, botones){
+        b->setEnabled(true);
+        b->setStyleSheet("#" + b->objectName() + "{ background-image: url(:/back_card.png);}");
+    }
 }
-
-
-
-
-
-
-
 
 void GameWindow::refreshTimer(){
     time=time.addSecs(-1);
@@ -205,10 +200,7 @@ void GameWindow::divideImgs(){
     }
 }
 
-
-
 GameWindow::~GameWindow()
 {
     delete ui;
 }
-
