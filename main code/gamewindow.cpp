@@ -45,6 +45,16 @@ void GameWindow:: randomStartPlayer(){
 
 }
 
+
+void GameWindow:: winner(){
+    if (points1 > points2){
+        msgBox.setText("You Win Player 1! Final Score: " + QString::number(points1) + "\nWanna play again?");
+    }
+    else{
+        msgBox.setText("You Win Player 2! Final Score: " + QString::number(points2) + "\nWanna play again?");
+    }
+
+}
 void GameWindow:: setFinalResult(){
     msgBox.setWindowTitle("Game Finished");
     msgBox.setIcon(QMessageBox::Information);
@@ -54,7 +64,9 @@ void GameWindow:: setFinalResult(){
 
     if (pairsLeft == 0){
         timer->stop();
-        msgBox.setText("You Win, Wanna Play Again?");
+        winner();
+        //msgBox.setText("You Win, Wanna Play Again?");
+        //msgBox.setText("¡Ganaste! Puntaje final: " + QString::number(points1) + "\nVolver a jugar?");
         if (QMessageBox::Yes == msgBox.exec()){
             startGame();
         }
@@ -101,38 +113,6 @@ void GameWindow::reiniciarTarjetas(){
     ui->CardsFrame->setEnabled(true);
 }
 
-void GameWindow::definirResultadoFinal(){
-    msgBox.setWindowTitle("Juego terminado");
-    msgBox.setIcon(QMessageBox::Information);
-    msgBox.setStandardButtons(QMessageBox::Yes);
-    msgBox.addButton(QMessageBox::No);
-    msgBox.setDefaultButton(QMessageBox::Yes);
-    msgBox.setEscapeButton(QMessageBox::No);
-
-    if (pairsLeft==0){
-        timer->stop();
-        msgBox.setText("¡Ganaste! Puntaje final: " + QString::number(points1) + "\nVolver a jugar?");
-        if (QMessageBox::Yes == msgBox.exec()){
-            startGame();
-        }
-        else{
-            QCoreApplication::quit();
-        }
-    }
-    else{
-        if (time.toString()=="00:00:00"){
-            timer->stop();
-            ui->CardsFrame->setEnabled(false);
-            msgBox.setText("Perdiste ;( \n¿Volver a jugar?");
-            if (QMessageBox::Yes == msgBox.exec()){
-                startGame();
-            }
-            else{
-                QCoreApplication::quit();
-            }
-        }
-    }
-}
 
 void GameWindow :: showCurrentPlayer(){
     if (actualPlayer == 1){

@@ -57,7 +57,7 @@ private slots:
     void showImage();
     void definirResultadoParcial();
     void reiniciarTarjetas();
-    void definirResultadoFinal();
+    void winner();
     void randomStartPlayer();
     void changeCurrentPlayer();
     void showCurrentPlayer();
