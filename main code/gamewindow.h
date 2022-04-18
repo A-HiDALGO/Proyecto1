@@ -33,13 +33,17 @@ public:
                            "card_10","card_11","card_12","card_13","card_14","card_15","card_16","card_17","card_18"};
 
     QHash<QString, QString> setRandomCards;
-    int points;
+    int points1;
+    int points2;
+    //int startPlayer;
     bool jugadaIniciada;
     QPushButton* tarjetaAnterior;
     QPushButton* tarjetaActual;
+    int actualPlayer;
 
 
 public slots:
+
     void getNick1(QString (n1));
     void getNick2(QString (n2));
 private slots:
@@ -54,6 +58,9 @@ private slots:
     void definirResultadoParcial();
     void reiniciarTarjetas();
     void definirResultadoFinal();
+    void randomStartPlayer();
+    void changeCurrentPlayer();
+    void showCurrentPlayer();
 
 
 

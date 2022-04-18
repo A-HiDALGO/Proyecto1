@@ -1,15 +1,15 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
 #include "ui_lobby.h"
+//==============================================================================================================
 
 GameWindow::GameWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::GameWindow)
 {
     ui->setupUi(this);
-
+    //Buttons connections
     connect(timer, SIGNAL(timeout()),this, SLOT(refreshGame()));
-
     connect(ui ->card, SIGNAL(clicked()),this,SLOT(findedCard()));
     connect(ui ->card_2, SIGNAL(clicked()),this,SLOT(findedCard()));
     connect(ui ->card_3, SIGNAL(clicked()),this,SLOT(findedCard()));
@@ -31,13 +31,18 @@ GameWindow::GameWindow(QWidget *parent)
 
     startGame();
 }
-
+//Functions to set the nicknames on screen
 void GameWindow:: getNick1(QString n1){
     ui->nickPlayer1->setText(QString (n1));
 
 }
 void GameWindow:: getNick2(QString n2){
     ui->nickPlayer2->setText(QString (n2));
+}
+//Function to randomize who starts
+void GameWindow:: randomStartPlayer(){
+    actualPlayer = (rand()%2);
+
 }
 
 void GameWindow:: setFinalResult(){
@@ -106,7 +111,7 @@ void GameWindow::definirResultadoFinal(){
 
     if (pairsLeft==0){
         timer->stop();
-        msgBox.setText("¡Ganaste! Puntaje final: " + QString::number(points) + "\nVolver a jugar?");
+        msgBox.setText("¡Ganaste! Puntaje final: " + QString::number(points1) + "\nVolver a jugar?");
         if (QMessageBox::Yes == msgBox.exec()){
             startGame();
         }
@@ -129,23 +134,61 @@ void GameWindow::definirResultadoFinal(){
     }
 }
 
-void GameWindow::definirResultadoParcial(){
-    if (setRandomCards[tarjetaActual->objectName()]==setRandomCards[tarjetaAnterior->objectName()]){
-        points+=100;
-        ui->PointsP1->setText(QString::number(points));
-        pairsLeft--;
-
-
+void GameWindow :: showCurrentPlayer(){
+    if (actualPlayer == 1){
+        ui->currentPlayer->setText(QString("Player1 is your turn"));
+        ui->frameP1->setStyleSheet("background-image: url(:/bgLobby.png);");
+        ui->frameP2->setStyleSheet(" ");
+        ui->currentPlayer->setStyleSheet("QLabel{font-size: 18px;font-family: Segoe UI;color: white;font-weight: bold;background-color: rgb(0,0,0);}");
     }
     else{
-        points-=5;
-        ui->PointsP1->setText(QString::number(points));
+        ui->currentPlayer->setText(QString("Player2 is your turn"));
+        ui->frameP2->setStyleSheet("background-image: url(:/bgLobby.png);");
+        ui->frameP1->setStyleSheet(" ");
+    }
 
-        //disable the whole tile section so no tiles can be turned during the 1-second "memorizing period"
-        ui->PointsP1->setEnabled(false);
 
-        //if there is no match, let user memorize tiles and after 1 second hide tiles from current turn so they can be used on another turn
-        QTimer::singleShot(1000, this, SLOT(reiniciarTarjetas()));
+}
+void GameWindow:: changeCurrentPlayer(){
+    if (actualPlayer == 1){
+        actualPlayer = 2;
+    }
+    else{
+        actualPlayer = 1;
+    }
+
+}
+
+void GameWindow::definirResultadoParcial(){
+    if (setRandomCards[tarjetaActual->objectName()]==setRandomCards[tarjetaAnterior->objectName()]){
+        pairsLeft--;
+        ui->CardsFrame->setEnabled(true);
+        if (actualPlayer == 1){
+            points1+=100;
+            ui->PointsP1->setText(QString::number(points1));
+        }
+        else{
+            points2+=100;
+            ui->PointsP2->setText(QString::number(points2));
+        }
+    }
+    else{
+        ui->CardsFrame->setEnabled(false);
+        QTimer::singleShot(900, this, SLOT(reiniciarTarjetas()));
+
+        if (actualPlayer == 1){
+            points1-=20;
+            ui->PointsP1->setText(QString::number(points1));
+            changeCurrentPlayer();
+            showCurrentPlayer();
+        }
+        else{
+            points2-=20;
+            ui->PointsP2->setText(QString::number(points2));
+            changeCurrentPlayer();
+            showCurrentPlayer();
+
+        }
     }
 }
 
@@ -158,10 +201,14 @@ void GameWindow::showImage(){
 
 void GameWindow::startGame(){
     jugadaIniciada = false;
-    points = 0;
-    ui->PointsP1->setText(QString::number(points));
+    randomStartPlayer();
+    showCurrentPlayer();
+    points1 = 0;
+    points2 = 0;
+    ui->PointsP1->setText(QString::number(points1));
+    ui->PointsP2->setText(QString::number(points2));
     pairsLeft = 9;
-    time.setHMS(0,1,0);
+    time.setHMS(0,4,0);
     ui->seconds->setText(time.toString("m;ss"));
     timer->start(1000);
     mixVector();

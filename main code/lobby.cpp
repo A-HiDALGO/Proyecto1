@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <QString>
 #include "ui_gamewindow.h"
-
+//==============================================================================================
 Lobby::Lobby(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Lobby)
@@ -12,8 +12,6 @@ Lobby::Lobby(QWidget *parent) :
     ui->setupUi(this);
     connect(ui ->startGame, SIGNAL(clicked()),this,SLOT(startGame()));
 }
-
-
 
 Lobby::~Lobby()
 {
@@ -29,7 +27,4 @@ void Lobby::startGame(){
     win1->getNick1(nickP1);
     QString nickP2 = ui->nickname2->text();
     win1->getNick2(nickP2);
-
-
 }
-
