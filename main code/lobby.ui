@@ -34,7 +34,6 @@
     </property>
     <property name="font">
      <font>
-      <family>Bahnschrift SemiBold</family>
       <pointsize>36</pointsize>
       <bold>true</bold>
      </font>
@@ -137,11 +136,25 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;PLAYER 2 NICKNAME&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <widget class="QLabel" name="nicksError">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>470</y>
+      <width>171</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>nickname1</zorder>
    <zorder>nickname2</zorder>
    <zorder>txtN1</zorder>
    <zorder>txtN2</zorder>
    <zorder>startGame</zorder>
+   <zorder>nicksError</zorder>
   </widget>
  </widget>
  <resources/>

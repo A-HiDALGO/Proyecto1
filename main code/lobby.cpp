@@ -10,7 +10,7 @@ Lobby::Lobby(QWidget *parent) :
     ui(new Ui::Lobby)
 {
     ui->setupUi(this);
-    connect(ui ->startGame, SIGNAL(clicked()),this,SLOT(startGame()));
+    connect(ui ->startGame, SIGNAL(clicked()),this,SLOT(verifyThenStart()));
 }
 
 Lobby::~Lobby()
@@ -19,6 +19,19 @@ Lobby::~Lobby()
 }
 
 
+
+
+void Lobby::verifyThenStart(){
+    QString nickP1 = ui->nickname1->text();
+    QString nickP2 = ui->nickname2->text();
+    if (nickP1 == "" || nickP2 == ""){
+        ui->nicksError->setText(QString("Put 2 nicknames to start"));
+        ui->nicksError->setStyleSheet("QLabel{font-size: 12px;font-family: Segoe UI;color: white;font-weight: bold;background-color: rgb(0,0,0);}");
+    }
+    else{
+        startGame();
+    }
+}
 void Lobby::startGame(){
     GameWindow *win1 = new GameWindow;
     win1->show();
@@ -27,4 +40,5 @@ void Lobby::startGame(){
     win1->getNick1(nickP1);
     QString nickP2 = ui->nickname2->text();
     win1->getNick2(nickP2);
+
 }

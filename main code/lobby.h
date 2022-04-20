@@ -18,6 +18,7 @@ public:
 
 private slots:
     void startGame();
+    void verifyThenStart();
 
 private:
     Ui::Lobby *ui;
