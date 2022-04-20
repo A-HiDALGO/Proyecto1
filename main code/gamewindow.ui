@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1132</width>
+    <width>1151</width>
     <height>621</height>
    </rect>
   </property>
@@ -31,7 +31,10 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: white
+     <string notr="true">#CardsFrame{
+border: 2px solid black;
+border-radius
+}
 </string>
     </property>
     <property name="frameShape">
@@ -340,13 +343,105 @@
     </property>
     <property name="styleSheet">
      <string notr="true">#StatusBar{
-color: white 
+color: white ;
+border: 2px solid black;
+border-radius
 }
 
 #PointsP1{
 qproperty-alignment: AlignCenter;
 background: teal;
 border: 3px solid silver;
+border-radius
+}
+
+#PointsP2{
+qproperty-alignment: AlignCenter;
+background: teal;
+border: 3px solid silver;
+border-radius
+}
+
+#txtPointsPlayer1{
+qproperty-alignment: AlignCenter;
+background: teal;
+border: 3px solid silver;
+border-radius
+}
+
+#txtPointsPlayer2{
+qproperty-alignment: AlignCenter;
+background: teal;
+border: 3px solid silver;
+border-radius
+}
+
+#timer{
+qproperty-alignment: AlignCenter;
+background: teal;
+border: 3px solid silver;
+border-radius
+}
+
+#seconds{
+qproperty-alignment: AlignCenter;
+background: teal;
+border: 3px solid silver;
+border-radius
+}
+
+#pup1{
+qproperty-alignment: AlignCenter;
+background: gray;
+border: 3px solid silver;
+border-radius
+}
+#pup2 {
+qproperty-alignment: AlignCenter;
+background: gray;
+border: 3px solid silver;
+border-radius 
+}
+
+
+#pup3{
+qproperty-alignment: AlignCenter;
+background: gray;
+border: 3px solid silver;
+border-radius
+}
+
+#pup1_2{
+qproperty-alignment: AlignCenter;
+background: gray;
+border: 3px solid silver;
+border-radius
+}
+
+#pup2_2{
+qproperty-alignment: AlignCenter;
+background: gray;
+border: 3px solid silver;
+border-radius
+}
+
+#pup3_2{
+qproperty-alignment: AlignCenter;
+background: gray;
+border: 3px solid silver;
+border-radius
+}
+
+
+
+#frameP1{
+qproperty-alignment: AlignCenter;
+border: 3px solid Black;
+border-radius
+}
+#frameP2{
+qproperty-alignment: AlignCenter;
+border: 3px solid Black;
 border-radius
 }</string>
     </property>
@@ -378,7 +473,7 @@ border-radius
       <string notr="true">color: white</string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;CASINO ROYALE&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;REMEMBERY&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -387,9 +482,9 @@ border-radius
     <widget class="QLabel" name="timer">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>90</y>
-       <width>71</width>
+       <x>20</x>
+       <y>70</y>
+       <width>91</width>
        <height>31</height>
       </rect>
      </property>
@@ -410,7 +505,7 @@ border-radius
      <property name="geometry">
       <rect>
        <x>120</x>
-       <y>90</y>
+       <y>70</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -428,26 +523,13 @@ border-radius
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;00:00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QLabel" name="currentPlayer">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>140</y>
-       <width>171</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:700;&quot;&gt;CurrentPlayer&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
     <widget class="QFrame" name="frameP1">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>210</y>
+       <y>120</y>
        <width>211</width>
-       <height>151</height>
+       <height>201</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -463,7 +545,7 @@ border-radius
       <property name="geometry">
        <rect>
         <x>100</x>
-        <y>100</y>
+        <y>80</y>
         <width>71</width>
         <height>31</height>
        </rect>
@@ -504,7 +586,7 @@ border-radius
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>100</y>
+        <y>80</y>
         <width>71</width>
         <height>31</height>
        </rect>
@@ -544,14 +626,53 @@ border-radius
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt; font-style:italic;&quot;&gt;NickPlayer1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="pup1">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>150</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pup3">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>150</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>3</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pup2">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>150</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QFrame" name="frameP2">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>370</y>
+       <y>330</y>
        <width>211</width>
-       <height>171</height>
+       <height>211</height>
       </rect>
      </property>
      <property name="frameShape">
@@ -564,7 +685,7 @@ border-radius
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>110</y>
+        <y>90</y>
         <width>71</width>
         <height>31</height>
        </rect>
@@ -630,7 +751,7 @@ border-radius
       <property name="geometry">
        <rect>
         <x>110</x>
-        <y>110</y>
+        <y>90</y>
         <width>71</width>
         <height>31</height>
        </rect>
@@ -643,6 +764,45 @@ border-radius
       </property>
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pup2_2">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>160</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>2</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pup1_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>160</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>1</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pup3_2">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>160</y>
+        <width>41</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>3</string>
       </property>
      </widget>
     </widget>

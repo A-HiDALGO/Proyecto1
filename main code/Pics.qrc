@@ -1,7 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>bg.png</file>
-        <file>background.jfif</file>
         <file>back_card.png</file>
         <file>01.png</file>
         <file>02.png</file>

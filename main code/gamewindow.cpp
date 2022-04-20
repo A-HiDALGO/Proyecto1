@@ -1,51 +1,52 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
 #include "ui_lobby.h"
-//==============================================================================================================
+//======================================================================
 
 GameWindow::GameWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::GameWindow)
 {
     ui->setupUi(this);
-    //Buttons connections
+    //Create the Buttons connections with the functions
     connect(timer, SIGNAL(timeout()),this, SLOT(refreshGame()));
-    connect(ui ->card, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_2, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_3, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_4, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_5, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_6, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_7, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_8, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_9, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_10, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_11, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_12, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_13, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_14, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_15, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_16, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_17, SIGNAL(clicked()),this,SLOT(findedCard()));
-    connect(ui ->card_18, SIGNAL(clicked()),this,SLOT(findedCard()));
+    connect(ui ->card, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_2, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_3, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_4, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_5, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_6, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_7, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_8, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_9, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_10, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_11, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_12, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_13, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_14, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_15, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_16, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_17, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_18, SIGNAL(clicked()),this,SLOT(flippedCard()));
 
     startGame();
 }
+//======================================================================
 //Functions to set the nicknames on screen
 void GameWindow:: getNick1(QString n1){
     ui->nickPlayer1->setText(QString (n1));
-
 }
 void GameWindow:: getNick2(QString n2){
     ui->nickPlayer2->setText(QString (n2));
 }
-//Function to randomize who starts
+
+//Function to randomize who play first
 void GameWindow:: randomStartPlayer(){
     actualPlayer = (rand()%2);
 
 }
 
-
+//Function to define the winner
 void GameWindow:: winner(){
     if (points1 > points2){
         msgBox.setText("You Win Player 1! Final Score: " + QString::number(points1) + "\nWanna play again?");
@@ -55,18 +56,18 @@ void GameWindow:: winner(){
     }
 
 }
+
+//Function to End the game
 void GameWindow:: setFinalResult(){
     msgBox.setWindowTitle("Game Finished");
     msgBox.setIcon(QMessageBox::Information);
     msgBox.setStandardButtons(QMessageBox::Yes);
     msgBox.addButton(QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::Yes);
-
+    //The Game Finish When There are no pairs left to find
     if (pairsLeft == 0){
         timer->stop();
         winner();
-        //msgBox.setText("You Win, Wanna Play Again?");
-        //msgBox.setText("¡Ganaste! Puntaje final: " + QString::number(points1) + "\nVolver a jugar?");
         if (QMessageBox::Yes == msgBox.exec()){
             startGame();
         }
@@ -74,6 +75,7 @@ void GameWindow:: setFinalResult(){
             QCoreApplication::quit();
         }
     }
+    //also the game end when the time's gone
     else{
         if (time.toString()== "00:00:00"){
             timer ->stop();
@@ -88,47 +90,46 @@ void GameWindow:: setFinalResult(){
    }
 }
 
-
-void GameWindow::findedCard(){
-    tarjetaActual=qobject_cast<QPushButton*> (sender());
+//Function to set Actual Cards when some player flip a card
+void GameWindow::flippedCard(){
+    ActualCard=qobject_cast<QPushButton*> (sender());
     showImage();
-    tarjetaActual->setEnabled(false);
-    if (!jugadaIniciada){
-        tarjetaAnterior = tarjetaActual;
-        jugadaIniciada=true;
+    ActualCard->setEnabled(false);
+    //Set PreviusCard with the first card player flipped to compare it yet
+    if (!GameStarted){
+        PreviousCard = ActualCard;
+        GameStarted=true;
     }
     else{
-        definirResultadoParcial();
-        jugadaIniciada=false;
+        setPartialResult();
+        GameStarted=false;
     }
 }
 
-void GameWindow::reiniciarTarjetas(){
-    tarjetaAnterior->setStyleSheet("#" + tarjetaAnterior->objectName() + "{ background-image: url(:/back_card.png);}");
-    tarjetaActual->setStyleSheet("#" + tarjetaActual->objectName() + "{ background-image: url(:/back_card.png);}");
+//Function to restart the Cars Flipped if they're not pairs
+void GameWindow::restartCards(){
+    PreviousCard->setStyleSheet("#" + PreviousCard->objectName() + "{ background-image: url(:/back_card.png);}");
+    ActualCard->setStyleSheet("#" + ActualCard->objectName() + "{ background-image: url(:/back_card.png);}");
     //re-enable both tiles so they can be used on another turn
-    tarjetaActual->setEnabled(true);
-    tarjetaAnterior->setEnabled(true);
+    ActualCard->setEnabled(true);
+    PreviousCard->setEnabled(true);
     //re-enable the whole tile section
     ui->CardsFrame->setEnabled(true);
 }
 
-
+//Function to show on screen the current player turn
 void GameWindow :: showCurrentPlayer(){
     if (actualPlayer == 1){
-        ui->currentPlayer->setText(QString("Player1 is your turn"));
         ui->frameP1->setStyleSheet("background-image: url(:/bgLobby.png);");
         ui->frameP2->setStyleSheet(" ");
-        ui->currentPlayer->setStyleSheet("QLabel{font-size: 18px;font-family: Segoe UI;color: white;font-weight: bold;background-color: rgb(0,0,0);}");
     }
     else{
-        ui->currentPlayer->setText(QString("Player2 is your turn"));
         ui->frameP2->setStyleSheet("background-image: url(:/bgLobby.png);");
         ui->frameP1->setStyleSheet(" ");
     }
-
-
 }
+
+//Function to switch player turns
 void GameWindow:: changeCurrentPlayer(){
     if (actualPlayer == 1){
         actualPlayer = 2;
@@ -136,11 +137,11 @@ void GameWindow:: changeCurrentPlayer(){
     else{
         actualPlayer = 1;
     }
-
 }
 
-void GameWindow::definirResultadoParcial(){
-    if (setRandomCards[tarjetaActual->objectName()]==setRandomCards[tarjetaAnterior->objectName()]){
+//Function to compare if flipped cards are pair or not
+void GameWindow::setPartialResult(){
+    if (setRandomCards[ActualCard->objectName()]==setRandomCards[PreviousCard->objectName()]){  // If cards are pair :
         pairsLeft--;
         ui->CardsFrame->setEnabled(true);
         if (actualPlayer == 1){
@@ -152,9 +153,9 @@ void GameWindow::definirResultadoParcial(){
             ui->PointsP2->setText(QString::number(points2));
         }
     }
-    else{
+    else{   // If cards arent pair :
         ui->CardsFrame->setEnabled(false);
-        QTimer::singleShot(900, this, SLOT(reiniciarTarjetas()));
+        QTimer::singleShot(900, this, SLOT(restartCards()));
 
         if (actualPlayer == 1){
             points1-=20;
@@ -172,35 +173,38 @@ void GameWindow::definirResultadoParcial(){
     }
 }
 
-void GameWindow::showImage(){
-    QString nombre_tarjeta=tarjetaActual->objectName();
-    QString img= setRandomCards[nombre_tarjeta];
-    tarjetaActual->setStyleSheet("#" + nombre_tarjeta + "{ background-image: url(://" + img + ") }");
 
+//Function to show the flipped card image on screen
+void GameWindow::showImage(){
+    QString cardName=ActualCard->objectName();
+    QString img= setRandomCards[cardName];
+    ActualCard->setStyleSheet("#" + cardName + "{ background-image: url(://" + img + ") }");
 }
 
+//Principal Function to Start the Game
 void GameWindow::startGame(){
-    jugadaIniciada = false;
+    GameStarted = false;
     randomStartPlayer();
     showCurrentPlayer();
-    points1 = 0;
-    points2 = 0;
+    points1 = 00;
+    points2 = 00;
     ui->PointsP1->setText(QString::number(points1));
     ui->PointsP2->setText(QString::number(points2));
     pairsLeft = 9;
-    time.setHMS(0,4,0);
+    time.setHMS(0,1,10);
     ui->seconds->setText(time.toString("m;ss"));
     timer->start(1000);
     mixVector();
     divideImgs();
     ui->CardsFrame->setEnabled(true);
-    QList<QPushButton *> botones = ui->CardsFrame->findChildren<QPushButton*>();
-    foreach (QPushButton* b, botones){
+    QList<QPushButton *> buttons = ui->CardsFrame->findChildren<QPushButton*>();
+    foreach (QPushButton* b, buttons){
         b->setEnabled(true);
         b->setStyleSheet("#" + b->objectName() + "{ background-image: url(:/back_card.png);}");
     }
 }
 
+//Fucntion that refresh Timer
 void GameWindow::refreshTimer(){
     time=time.addSecs(-1);
     ui ->seconds->setText(time.toString("m:ss"));
@@ -211,6 +215,7 @@ void GameWindow::refreshGame(){
     setFinalResult();
 }
 
+//Function for randomize the cards Vector
 void GameWindow::mixVector(){
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     shuffle(cardsOrder.begin() , cardsOrder.end(), std::default_random_engine(seed));
@@ -227,6 +232,7 @@ void GameWindow::divideImgs(){
     }
 }
 
+//======================================================================
 GameWindow::~GameWindow()
 {
     delete ui;

@@ -15,7 +15,6 @@ public:
     explicit Lobby(QWidget *parent = nullptr);
     ~Lobby();
 
-
 private slots:
     void startGame();
     void verifyThenStart();

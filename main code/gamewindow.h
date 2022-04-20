@@ -35,34 +35,30 @@ public:
     QHash<QString, QString> setRandomCards;
     int points1;
     int points2;
-    //int startPlayer;
-    bool jugadaIniciada;
-    QPushButton* tarjetaAnterior;
-    QPushButton* tarjetaActual;
+    bool GameStarted;
+    QPushButton* PreviousCard;
+    QPushButton* ActualCard;
     int actualPlayer;
 
-
 public slots:
-
     void getNick1(QString (n1));
     void getNick2(QString (n2));
+
 private slots:
     void refreshGame();
     void refreshTimer();
     void setFinalResult();
     void startGame();
-    void findedCard();
+    void flippedCard();
     void mixVector();
     void divideImgs();
     void showImage();
-    void definirResultadoParcial();
-    void reiniciarTarjetas();
+    void setPartialResult();
+    void restartCards();
     void winner();
     void randomStartPlayer();
     void changeCurrentPlayer();
     void showCurrentPlayer();
-
-
 
 private:
     Ui::GameWindow *ui;

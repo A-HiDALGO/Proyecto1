@@ -18,9 +18,7 @@ Lobby::~Lobby()
     delete ui;
 }
 
-
-
-
+//Function To Verify if both Players type their Nicknames to start to play
 void Lobby::verifyThenStart(){
     QString nickP1 = ui->nickname1->text();
     QString nickP2 = ui->nickname2->text();
