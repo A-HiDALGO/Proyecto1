@@ -12,5 +12,8 @@
         <file>09.png</file>
         <file>bgLobby.png</file>
         <file>bg1.png</file>
+        <file>010.png</file>
+        <file>011.png</file>
+        <file>012.png</file>
     </qresource>
 </RCC>

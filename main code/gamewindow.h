@@ -30,7 +30,8 @@ public:
     QMessageBox msgBox;
     QVector<QString> cardsOrder{"card", "card_2","card_3","card_4",
                            "card_5","card_6","card_7","card_8","card_9",
-                           "card_10","card_11","card_12","card_13","card_14","card_15","card_16","card_17","card_18"};
+                           "card_10","card_11","card_12","card_13","card_14",
+                                "card_15","card_16","card_17","card_18","card_19","card_20","card_21","card_22","card_23","card_24"};
 
     QHash<QString, QString> setRandomCards;
     int points1;
@@ -59,6 +60,11 @@ private slots:
     void randomStartPlayer();
     void changeCurrentPlayer();
     void showCurrentPlayer();
+    void DoPowerUp1();
+    void DoPowerUp2();
+    void DoPowerUp3();
+    void BlockPowerUps();
+    void reShowPowerUps();
 
 private:
     Ui::GameWindow *ui;

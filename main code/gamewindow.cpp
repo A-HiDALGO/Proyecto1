@@ -1,6 +1,7 @@
 #include "gamewindow.h"
 #include "ui_gamewindow.h"
 #include "ui_lobby.h"
+#include <QThread>
 //======================================================================
 
 GameWindow::GameWindow(QWidget *parent)
@@ -8,7 +9,7 @@ GameWindow::GameWindow(QWidget *parent)
     , ui(new Ui::GameWindow)
 {
     ui->setupUi(this);
-    //Create the Buttons connections with the functions
+    //Create the Cards connections with the functions
     connect(timer, SIGNAL(timeout()),this, SLOT(refreshGame()));
     connect(ui ->card, SIGNAL(clicked()),this,SLOT(flippedCard()));
     connect(ui ->card_2, SIGNAL(clicked()),this,SLOT(flippedCard()));
@@ -28,6 +29,21 @@ GameWindow::GameWindow(QWidget *parent)
     connect(ui ->card_16, SIGNAL(clicked()),this,SLOT(flippedCard()));
     connect(ui ->card_17, SIGNAL(clicked()),this,SLOT(flippedCard()));
     connect(ui ->card_18, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_19, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_20, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_21, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_22, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_23, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    connect(ui ->card_24, SIGNAL(clicked()),this,SLOT(flippedCard()));
+    //Create the PowerUps connections with the functions
+    connect(ui ->PowerUp1, SIGNAL(clicked()),this,SLOT(DoPowerUp1()));
+    connect(ui ->PowerUp2, SIGNAL(clicked()),this,SLOT(DoPowerUp2()));
+    connect(ui ->PowerUp3, SIGNAL(clicked()),this,SLOT(DoPowerUp3()));
+    connect(ui ->PowerUp1_P2, SIGNAL(clicked()),this,SLOT(DoPowerUp1()));
+    connect(ui ->PowerUp2_P2, SIGNAL(clicked()),this,SLOT(DoPowerUp2()));
+    connect(ui ->PowerUp3_P2, SIGNAL(clicked()),this,SLOT(DoPowerUp3()));
+
+
 
     startGame();
 }
@@ -79,7 +95,7 @@ void GameWindow:: setFinalResult(){
     else{
         if (time.toString()== "00:00:00"){
             timer ->stop();
-            msgBox.setText("You Lost, Wanna try again?");
+            winner();
             if (QMessageBox::Yes == msgBox.exec()){
                 startGame();
         }
@@ -123,7 +139,7 @@ void GameWindow :: showCurrentPlayer(){
         ui->frameP1->setStyleSheet("background-image: url(:/bgLobby.png);");
         ui->frameP2->setStyleSheet(" ");
     }
-    else{
+    else{    
         ui->frameP2->setStyleSheet("background-image: url(:/bgLobby.png);");
         ui->frameP1->setStyleSheet(" ");
     }
@@ -133,9 +149,11 @@ void GameWindow :: showCurrentPlayer(){
 void GameWindow:: changeCurrentPlayer(){
     if (actualPlayer == 1){
         actualPlayer = 2;
+        BlockPowerUps();
     }
     else{
         actualPlayer = 1;
+        BlockPowerUps();
     }
 }
 
@@ -174,6 +192,77 @@ void GameWindow::setPartialResult(){
 }
 
 
+
+//Power Ups ====================================
+void GameWindow :: reShowPowerUps(){
+    ui->PowerUp1->show();
+    ui->PowerUp2->show();
+    ui->PowerUp3->show();
+    ui->PowerUp1_P2->show();
+    ui->PowerUp2_P2->show();
+    ui->PowerUp3_P2->show();
+
+}
+void GameWindow:: BlockPowerUps(){
+    if (actualPlayer == 1){
+        ui->PowerUp1_P2->setEnabled(false);
+        ui->PowerUp2_P2->setEnabled(false);
+        ui->PowerUp3_P2->setEnabled(false);
+        ui->PowerUp1->setEnabled(true);
+        ui->PowerUp2->setEnabled(true);
+        ui->PowerUp3->setEnabled(true);
+    }
+    else{
+        ui->PowerUp1->setEnabled(false);
+        ui->PowerUp2->setEnabled(false);
+        ui->PowerUp3->setEnabled(false);
+        ui->PowerUp1_P2->setEnabled(true);
+        ui->PowerUp2_P2->setEnabled(true);
+        ui->PowerUp3_P2->setEnabled(true);
+
+    }
+}
+
+
+void GameWindow:: DoPowerUp1(){
+    time=time.addSecs(15);
+    if (actualPlayer == 1){
+        ui->PowerUp1->hide();
+    }
+    else{
+        ui->PowerUp1_P2->hide();
+    }
+}
+
+void GameWindow:: DoPowerUp2(){
+    time=time.addSecs(-15);
+    if (actualPlayer == 1){
+        ui->PowerUp2->hide();
+    }
+    else{
+        ui->PowerUp2_P2->hide();
+    }
+}
+
+void GameWindow:: DoPowerUp3(){
+
+    if (actualPlayer == 1){
+        ui->PowerUp3->hide();
+    }
+    else{
+        ui->PowerUp3_P2->hide();
+    }
+}
+
+
+
+
+
+
+
+
+
+
 //Function to show the flipped card image on screen
 void GameWindow::showImage(){
     QString cardName=ActualCard->objectName();
@@ -190,12 +279,14 @@ void GameWindow::startGame(){
     points2 = 00;
     ui->PointsP1->setText(QString::number(points1));
     ui->PointsP2->setText(QString::number(points2));
-    pairsLeft = 9;
-    time.setHMS(0,1,10);
+    pairsLeft = 12;
+    time.setHMS(0,2,00);
     ui->seconds->setText(time.toString("m;ss"));
     timer->start(1000);
     mixVector();
     divideImgs();
+    BlockPowerUps();
+    reShowPowerUps();
     ui->CardsFrame->setEnabled(true);
     QList<QPushButton *> buttons = ui->CardsFrame->findChildren<QPushButton*>();
     foreach (QPushButton* b, buttons){
@@ -223,7 +314,7 @@ void GameWindow::mixVector(){
 
 void GameWindow::divideImgs(){
     auto iterador = cardsOrder.begin();
-    for (int i=1; i<=9; i++){
+    for (int i=1; i<=12; i++){
         QString file_name = "0"+ QString::number(i)+".png";
         setRandomCards[(*iterador)]= file_name;
         iterador++;
