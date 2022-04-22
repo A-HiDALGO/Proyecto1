@@ -9,6 +9,7 @@ Lobby::Lobby(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Lobby)
 {
+    //Connect the button to the verify function
     ui->setupUi(this);
     connect(ui ->startGame, SIGNAL(clicked()),this,SLOT(verifyThenStart()));
 }
@@ -30,6 +31,7 @@ void Lobby::verifyThenStart(){
         startGame();
     }
 }
+//Function to start the game window
 void Lobby::startGame(){
     GameWindow *win1 = new GameWindow;
     win1->show();

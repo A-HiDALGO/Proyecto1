@@ -730,8 +730,14 @@ border-radius
         <height>41</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
-       <string>Second Chance</string>
+       <string>+ 100 points</string>
       </property>
      </widget>
      <widget class="QPushButton" name="PowerUp2">
@@ -742,6 +748,12 @@ border-radius
         <width>121</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="text">
        <string>- 15 Seconds</string>
@@ -755,6 +767,12 @@ border-radius
         <width>121</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true"/>
@@ -873,6 +891,12 @@ border-radius
         <height>41</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
        <string>- 15 Seconds</string>
       </property>
@@ -885,6 +909,12 @@ border-radius
         <width>121</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="text">
        <string>+ 15 Seconds</string>
@@ -899,8 +929,14 @@ border-radius
         <height>41</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
-       <string>Second Chance</string>
+       <string>+ 100 points</string>
       </property>
      </widget>
     </widget>

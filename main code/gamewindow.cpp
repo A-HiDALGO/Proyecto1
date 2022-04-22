@@ -106,21 +106,7 @@ void GameWindow:: setFinalResult(){
    }
 }
 
-//Function to set Actual Cards when some player flip a card
-void GameWindow::flippedCard(){
-    ActualCard=qobject_cast<QPushButton*> (sender());
-    showImage();
-    ActualCard->setEnabled(false);
-    //Set PreviusCard with the first card player flipped to compare it yet
-    if (!GameStarted){
-        PreviousCard = ActualCard;
-        GameStarted=true;
-    }
-    else{
-        setPartialResult();
-        GameStarted=false;
-    }
-}
+
 
 //Function to restart the Cars Flipped if they're not pairs
 void GameWindow::restartCards(){
@@ -223,7 +209,7 @@ void GameWindow:: BlockPowerUps(){
     }
 }
 
-
+//This powerUp Add 15 seconds on the timer .
 void GameWindow:: DoPowerUp1(){
     time=time.addSecs(15);
     if (actualPlayer == 1){
@@ -234,6 +220,7 @@ void GameWindow:: DoPowerUp1(){
     }
 }
 
+//This powerUp substracts 15 seconds on the timer
 void GameWindow:: DoPowerUp2(){
     time=time.addSecs(-15);
     if (actualPlayer == 1){
@@ -244,24 +231,20 @@ void GameWindow:: DoPowerUp2(){
     }
 }
 
+//This powerUp Add 100 extra points when a player use it
 void GameWindow:: DoPowerUp3(){
-
     if (actualPlayer == 1){
+        points1+=100;
+        ui->PointsP1->setText(QString::number(points1));
         ui->PowerUp3->hide();
+
     }
     else{
+        points2+=100;
+        ui->PointsP2->setText(QString::number(points2));
         ui->PowerUp3_P2->hide();
     }
 }
-
-
-
-
-
-
-
-
-
 
 //Function to show the flipped card image on screen
 void GameWindow::showImage(){
@@ -312,6 +295,7 @@ void GameWindow::mixVector(){
     shuffle(cardsOrder.begin() , cardsOrder.end(), std::default_random_engine(seed));
 }
 
+//This function divide all the images
 void GameWindow::divideImgs(){
     auto iterador = cardsOrder.begin();
     for (int i=1; i<=12; i++){
@@ -323,6 +307,21 @@ void GameWindow::divideImgs(){
     }
 }
 
+//Function to set Actual Cards when some player flip a card
+void GameWindow::flippedCard(){
+    ActualCard=qobject_cast<QPushButton*> (sender());
+    showImage();
+    ActualCard->setEnabled(false);
+    //Set PreviusCard with the first card player flipped to compare it yet
+    if (!GameStarted){
+        PreviousCard = ActualCard;
+        GameStarted=true;
+    }
+    else{
+        setPartialResult();
+        GameStarted=false;
+    }
+}
 //======================================================================
 GameWindow::~GameWindow()
 {
